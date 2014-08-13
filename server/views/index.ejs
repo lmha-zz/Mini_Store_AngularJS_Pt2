@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="miniStore">
 <head>
 	<meta charset="UTF-8">
-	<title>Fruit Stand</title>
+	<title ng-bind="title"></title>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -15,11 +15,12 @@
 	<script src="/javascripts/miniStoreRoutes.js"></script>
 </head>
 <body>
-	<div class="container" ng-app="miniStore">
+	<div class="container">
 		<ul class="nav nav-pills">
-			<li><a href="#/">Orders</a></li>
-			<li><a href="#/customers">Customers</a></li>
+			<li><a href="#/">Dashboard</a></li>
 			<li><a href="#/products">Products</a></li>
+			<li><a href="#/orders">Orders</a></li>
+			<li><a href="#/customers">Customers</a></li>
 		</ul>
 		<div class="page-header">
 			<h1>Welcome to the Fruit Stand! <small>Place orders today.</small></h1>

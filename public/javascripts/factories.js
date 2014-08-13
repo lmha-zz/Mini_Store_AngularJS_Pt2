@@ -1,4 +1,5 @@
 miniStore.factory('OrderFactory', function($http) {
+	var title = 'Orders | Store';
 	var factory = {};
 	var orders = [];
 	factory.initOrders = function(x) {
