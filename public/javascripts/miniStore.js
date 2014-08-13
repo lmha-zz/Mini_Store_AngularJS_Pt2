@@ -1,0 +1,1 @@
+var miniStore = angular.module('miniStore', ['ngRoute']);
