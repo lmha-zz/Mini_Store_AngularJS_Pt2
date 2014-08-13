@@ -28,18 +28,29 @@
 			<input ng-model="searchProducts" id="searchBox" class='form-control' type="text" name="search" placeholder="Search Products...">
 		</div>
 	</div>
-	<div class="panel panel-default">
-		<table class='table table-striped table-bordered'>
-			<thead>
-				<tr>
-					<th>Product Name</th>
-				</tr>
-			</thead>
-			<tbody ng-repeat="product in products | filter:searchProducts ">
-				<tr>
-					<td ng-bind="product.name"></td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<div class="panel panel-default">
+				<table class='table table-striped table-bordered'>
+					<thead>
+						<tr>
+							<th class="text-center">Quantity</th>
+							<th>Product Name</th>
+							<th class="text-center">Images</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat="product in products | filter:searchProducts ">
+						<tr>
+							<td class="col-sm-1 text-center vcenter" ng-bind="product.quantity"></td>
+							<td class="vcenter" ng-bind="product.name"></td>
+							<td class="col-sm-1 text-center">
+								<img class="icons" ng-src="/images/{{ product.name }}.jpg" alt="{{ product.name }} image">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
 	</div>
 </div>
