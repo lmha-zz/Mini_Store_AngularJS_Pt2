@@ -2,20 +2,17 @@ miniStore.factory('OrderFactory', function($http) {
 	var title = 'Orders | Store';
 	var factory = {};
 	var orders = [];
-	factory.initOrders = function(x) {
+	factory.getOrders = function(x) {
 		$http.get('/orders.json').success(function(allOrders) {
 			orders = allOrders;
 			x(allOrders);
 		})
 	}
-	factory.getOrders = function() {
-		return orders;
-	}
-	factory.createOrder = function(order, x, y) {
+	factory.createOrder = function(order, y, z) {
 		$http.post('/orders/create', { new_order: order })
 			.success(function(data) {
 				orders.push(data);
-				x();
+				z();
 			})
 			.error(function(err) {
 				y(err);
@@ -27,20 +24,16 @@ miniStore.factory('OrderFactory', function($http) {
 miniStore.factory('CustomerFactory', function($http) {
 	var factory = {};
 	var customers = [];
-	factory.initCustomers = function(x) {
+	factory.getCustomers = function(x) {
 		$http.get('/customers.json').success(function(allCustomers) {
 			customers = allCustomers;
 			x(allCustomers);
 		});
 	}
-	factory.getCustomers = function() {
-		return customers;
-	}
-	factory.createCustomer = function(name, x, y) {
+	factory.createCustomer = function(name, y) {
 		$http.post('/customers/create', { name: name })
 			.success(function(data) {
 				customers.push(data);
-				x();
 			})
 			.error(function(err){
 				y(err);
@@ -52,23 +45,31 @@ miniStore.factory('CustomerFactory', function($http) {
 miniStore.factory('ProductFactory', function($http) {
 	var factory = {};
 	var products = [];
-	factory.initProducts = function(x) {
+	factory.getProducts = function(x) {
 		$http.get('/products.json').success(function(allProducts) {
 			products = allProducts;
 			x(allProducts)
 		});
 	}
-	factory.getProducts = function() {
-		return products;
-	}
-	factory.createProduct = function(name, x, y) {
-		$http.post('/products/create', { name: name })
+	factory.createProduct = function(product, y) {
+		$http.post('/products/create', { new_product: product })
 			.success(function(data) {
 				products.push(data);
-				x();
 			})
 			.error(function(err){
 				y(err);
+			})
+	}
+	factory.updateProduct = function(id, quantity, x) {
+		$http.post('/products/update', { id:id, quantity: quantity })
+			.success(function(){
+				$http.get('/products.json')
+					.success(function(allProducts) {
+						products = allProducts;
+					});
+			})
+			.error(function(err) {
+				x(err);
 			})
 	}
 	return factory;

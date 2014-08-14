@@ -11,7 +11,7 @@
 				<div class="form-group">
 					<label class="col-sm-4 control-label" for="customer">Customer:</label>
 					<div class="col-sm-8">
-						<select required ng-model="new_order.customer_name" class="form-control" name="customer" id="customer">
+						<select ng-model="new_order.customer_name" class="form-control" name="customer" id="customer">
 							<option value="">Please Select a Customer</option>
 							<option ng-bind="customer.name" ng-repeat="customer in customers" value="{{ customer.name }}"></option>
 						</select>
@@ -23,7 +23,7 @@
 						<input ng-model="new_order.quantity" type="number" class="col-sm-3 form-control" name="quantity" id="quantity">
 						<select ng-model="new_order.product" class="col-sm-9 form-control pull-right" class="col-sm-8" name="product" id="product">
 							<option value="">Please Select a Product</option>
-							<option ng-repeat="product in products" ng-bind="product.name" value="{{ product.name }}"></option>
+							<option ng-repeat="product in products" value="{{ product._id }}">{{ product.name }} - ({{ product.quantity }} available)</option>
 						</select>
 					</div>
 				</div>

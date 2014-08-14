@@ -16,4 +16,5 @@ module.exports = function Routes(app) {
 	app.get('/products.json', function(req,res) { products.index_json(req,res) });
 	app.get('/products/new', function(req,res) {products.new(req,res) });
 	app.post('/products/create', function(req,res) { products.create(req,res) });
+	app.post('/products/update', function(req,res) { products.update(req,res) });
 }

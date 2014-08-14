@@ -11,7 +11,7 @@ module.exports = {
 		});
 	},
 	create: function(req, res) {
-		var a = new Product(req.body);
+		var a = new Product(req.body.new_product);
 		a.save(function(err) {
 			if(err) {
 				res.status(418);
@@ -21,6 +21,16 @@ module.exports = {
 				res.json(err);
 			} else {
 				res.json(a)
+			}
+		})
+	},
+	update: function(req, res) {
+		Product.update({ _id: req.body.id}, { $inc: { quantity: -req.body.quantity } }, function(err, data) {
+			if(err) {
+				res.status(418);
+				res.json(err);
+			} else {
+				res.json(data)
 			}
 		})
 	}

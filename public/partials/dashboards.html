@@ -2,16 +2,16 @@
 	<div class="row">
 		<div class="col-sm-2">
 			<div class="row">
-				<input class="form-control" type="text" placeholder="search ..." ng-model="search">
+				<input ng-model="searchProducts" id="searchBox" class='form-control' type="text" name="search" placeholder="Search Products...">
 			</div>
 			<div class="row">
-				<button class="btn btn-default pull-right marginButton">Filter</button>
+				<button class="btn btn-info pull-right marginButton">Filter</button>
 			</div>
 		</div>
 		<div class="col-sm-10 pull-right smallCols">
 			<div class="row">
 				<div ng-repeat="product in products | limitTo: 5 | filter: search " class="col-sm-1 prodBox text-center">
-					<img ng-src="/images/{{ product.name }}.jpg" alt="{{ product.name }} image">
+					<img ng-src="{{ product.image }}" alt="{{ product.name }} image">
 					<p class="prodInfo" ng-bind="product.name"></p>
 					<p class="prodInfo">({{ product.quantity }})</p>
 				</div>
