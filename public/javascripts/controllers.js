@@ -20,6 +20,10 @@ miniStore.controller('dashboards', ['$scope', '$http', 'OrderFactory', 'Customer
 			}
 		)
 	}
+	$scope.calculateTimeDiff = function(time) {
+		console.log(time)
+	}
+	$scope.now = new Date().toISOString();
 	$scope.prodLim = 5;
 	$scope.orderLim = 3;
 	$scope.custLim = 3;

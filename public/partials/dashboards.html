@@ -28,7 +28,7 @@
 					</thead>
 					<tbody>
 						<tr class="col-sm-12" ng-repeat="order in orders | limitTo: orderLim | filter: search ">
-							<td>{{ order.customer_name }} purchased {{ order.quantity }} {{ order.product }}... ({{ order.order_date | date: 'longDate' }})<td>
+							<td>{{ order.customer_name }} purchased {{ order.quantity }} {{ order.product }}... ( {{ order.order_date | date: 'longDate' }} )<td>
 						</tr>
 					</tbody>
 				</table>
@@ -38,7 +38,7 @@
 			</div>
 			<div class="row">
 				<h3>New Customers</h3>
-				<p class="col-sm-12" ng-repeat="customer in customers | limitTo: custLim | filter: search "><button ng-click="delCust(customer._id)" class="btn btn-xs btn-danger">x</button>{{ customer.name }} joined the store ( days ago)</p>
+				<p class="col-sm-12" ng-repeat="customer in customers | limitTo: custLim | filter: search "><button ng-click="delCust(customer._id)" class="btn btn-xs btn-danger">x</button>{{ customer.name }} joined the store on {{ customer.created_at | date: 'longDate' }}</p>
 			</div>
 			<div class='row text-center'>
 				<a ng-click="removeLim('customers')">show all customers ... </a>
