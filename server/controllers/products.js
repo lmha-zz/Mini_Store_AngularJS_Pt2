@@ -6,8 +6,8 @@ module.exports = {
 		res.render('index', { title: 'Welcome to the Fruit Stand' })
 	},
 	index_json: function(req, res) {
-		Product.find({}, function(err, products) {
-			res.send(JSON.stringify(products));
+		Product.find({}).sort('-created_at').exec(function(err, orders) {
+			res.send(JSON.stringify(orders));
 		});
 	},
 	create: function(req, res) {

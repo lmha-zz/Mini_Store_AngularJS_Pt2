@@ -6,8 +6,8 @@ module.exports = {
 		res.render('partials/customers', { title: 'Welcome to the Fruit Stand' })
 	},
 	index_json: function(req, res) {
-		Customer.find({}, function(err, customers) {
-			res.send(JSON.stringify(customers))
+		Customer.find({}).sort('-created_at').exec(function(err, orders) {
+			res.send(JSON.stringify(orders));
 		});
 	},
 	create: function(req, res) {
@@ -21,6 +21,16 @@ module.exports = {
 				res.json(err);
 			} else {
 				res.json(a)
+			}
+		})
+	},
+	delete: function(req, res) {
+		Customer.remove({ _id: req.params.id }, function(err, win) {
+			if(err) {
+				res.status(418);
+				res.json(err)
+			} else {
+				res.json(win)
 			}
 		})
 	}

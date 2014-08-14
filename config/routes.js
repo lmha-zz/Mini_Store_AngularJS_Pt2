@@ -12,6 +12,7 @@ module.exports = function Routes(app) {
 	app.get('/customers.json', function(req,res) { customers.index_json(req,res) });
 	app.get('/customers/new', function(req,res) {customers.new(req,res) });
 	app.post('/customers/create', function(req,res) { customers.create(req,res) });
+	app.post('/customers/:id/delete', function(req,res) { customers.delete(req,res) });
 	app.get('/products', function(req,res) { products.index(req,res) });
 	app.get('/products.json', function(req,res) { products.index_json(req,res) });
 	app.get('/products/new', function(req,res) {products.new(req,res) });

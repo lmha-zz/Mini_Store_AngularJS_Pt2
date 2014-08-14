@@ -33,11 +33,13 @@
 			<thead>
 				<tr>
 					<th>Customer Name</th>
+					<th>Join us On</th>
 				</tr>
 			</thead>
 			<tbody ng-repeat="customer in customers | filter: searchCustomers ">
 				<tr>
 					<td ng-bind="customer.name"></td>
+					<td>{{ customer.created_at | date: 'longDate' }}</td>
 				</tr>
 			</tbody>
 		</table>

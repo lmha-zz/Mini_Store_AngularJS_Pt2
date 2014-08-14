@@ -7,7 +7,7 @@ module.exports = {
 		res.render('index', { title: 'Welcome to the Fruit Stand' })
 	},
 	index_json: function(req, res) {
-		Order.find({}, function(err, orders) {
+		Order.find({}).sort('-order_date').exec(function(err, orders) {
 			res.send(JSON.stringify(orders));
 		});
 	},
@@ -43,6 +43,7 @@ module.exports = {
 							if(errs) {
 								err = errs;
 							} else {
+								// console.log('success!')
 								res.json(a);
 							}
 						})

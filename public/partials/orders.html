@@ -21,9 +21,8 @@
 					<label class="col-sm-4 control-label" for="">Order:</label>
 					<div class="col-sm-8">
 						<input ng-model="new_order.quantity" type="number" class="col-sm-3 form-control" name="quantity" id="quantity">
-						<select ng-model="new_order.product" class="col-sm-9 form-control pull-right" class="col-sm-8" name="product" id="product">
+						<select ng-model="new_order.product" class="col-sm-9 form-control pull-right" class="col-sm-8" name="product" id="product" ng-options="product._id as (product.name +' ('+product.quantity + ' available)') for product in products">
 							<option value="">Please Select a Product</option>
-							<option ng-repeat="product in products" value="{{ product._id }}">{{ product.name }} - ({{ product.quantity }} available)</option>
 						</select>
 					</div>
 				</div>

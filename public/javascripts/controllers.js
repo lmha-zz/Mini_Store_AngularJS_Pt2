@@ -2,12 +2,23 @@ miniStore.controller('dashboards', ['$scope', '$http', 'OrderFactory', 'Customer
 	$scope.incProdLim = function() {
 		$scope.prodLim+=5;
 	}
-	$scope.removeLim = function(x) {
-		if(x == 'orders') {
+	$scope.removeLim = function(category) {
+		if(category == 'orders') {
 			$scope.orderLim = $scope.orders.length;
 		} else {
 			$scope.custLim = $scope.customers.length;
 		}
+	}
+	$scope.delCust = function(id) {
+		$scope.errors = '';
+		CustomerFactory.deleteCustomer(id,
+			function(customers){
+				$scope.customers = customers;
+			},
+			function(err) {
+				$scope.errors = err;
+			}
+		)
 	}
 	$scope.prodLim = 5;
 	$scope.orderLim = 3;
@@ -37,6 +48,9 @@ miniStore.controller('orders', ['$scope', '$http', 'OrderFactory', 'CustomerFact
 					$scope.new_order.quantity,
 					function(err) {
 						$scope.errors = errs
+					},
+					function(products) {
+						$scope.products = products;
 					}
 				)
 				$scope.new_order = null;
@@ -63,6 +77,9 @@ miniStore.controller('products', ['$scope', '$http', 'ProductFactory', function(
 		ProductFactory.createProduct($scope.new_product,
 			function(errs){
 				$scope.errors = errs;
+			},
+			function(products) {
+				$scope.products = products;
 			}
 		);
 		$scope.new_product = null;
@@ -79,6 +96,9 @@ miniStore.controller('customers', ['$scope', '$http', 'CustomerFactory', functio
 		CustomerFactory.createCustomer($scope.new_customer,
 			function(errs) {
 				$scope.errors = errs;
+			},
+			function(customers) {
+				$scope.customers = customers
 			}
 		);
 		$scope.new_customer = null;
