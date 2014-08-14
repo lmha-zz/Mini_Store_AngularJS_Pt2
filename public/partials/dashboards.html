@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-sm-2">
 			<div class="row">
-				<input ng-model="searchProducts" id="searchBox" class='form-control' type="text" name="search" placeholder="Search Products...">
+				<input ng-model="search" id="searchBox" class='form-control' type="text" name="search" placeholder="Search Products...">
 			</div>
 			<div class="row">
 				<button class="btn btn-info pull-right marginButton">Filter</button>
@@ -10,28 +10,38 @@
 		</div>
 		<div class="col-sm-10 pull-right smallCols">
 			<div class="row">
-				<div ng-repeat="product in products | limitTo: 5 | filter: search " class="col-sm-1 prodBox text-center">
+				<div ng-repeat="product in products | limitTo: prodLim | filter: search " class="col-sm-1 prodBox text-center">
 					<img ng-src="{{ product.image }}" alt="{{ product.name }} image">
 					<p class="prodInfo" ng-bind="product.name"></p>
 					<p class="prodInfo">({{ product.quantity }})</p>
 				</div>
 			</div>
 			<div class="row text-center">
-				<a href="#/products">show more ... </a>
+				<a ng-click="incProdLim()">show more ... </a>
 			</div>
 			<div class="row">
-				<h3>Recent Orders</h3>
-				<p class="col-sm-12" ng-repeat="order in orders | limitTo: 3 | filter: search ">{{ order.customer_name }} purchased {{ order.quantity }} {{ order.product }}... ({{ order.created_at }})</p>
+				<table>
+					<thead>
+						<tr>
+							<th><h3>Recent Orders</h3></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="col-sm-12" ng-repeat="order in orders | limitTo: orderLim | filter: search ">
+							<td>{{ order.customer_name }} purchased {{ order.quantity }} {{ order.product }}... ({{ order.order_date | date: 'longDate' }})<td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<div class='row text-center'>
-				<a href="#/orders">show all orders ... </a>
+				<a ng-click="removeLim('orders')">show all orders ... </a>
 			</div>
 			<div class="row">
 				<h3>New Customers</h3>
-				<p class="col-sm-12" ng-repeat="customer in customers | limitTo: 3 | filter: search "><button class="btn btn-xs btn-danger">x</button>{{ customer.name }} joined the store ( days ago)</p>
+				<p class="col-sm-12" ng-repeat="customer in customers | limitTo: custLim | filter: search "><button class="btn btn-xs btn-danger">x</button>{{ customer.name }} joined the store ( days ago)</p>
 			</div>
 			<div class='row text-center'>
-				<a href="#/customers">show all customers ... </a>
+				<a ng-click="removeLim('customers')">show all customers ... </a>
 			</div>
 		</div>
 	</div>

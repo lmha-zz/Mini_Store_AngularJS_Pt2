@@ -1,4 +1,18 @@
 miniStore.controller('dashboards', ['$scope', '$http', 'OrderFactory', 'CustomerFactory', 'ProductFactory', function($scope, $http, OrderFactory, CustomerFactory, ProductFactory) {
+	$scope.incProdLim = function() {
+		$scope.prodLim+=5;
+	}
+	$scope.removeLim = function(x) {
+		if(x == 'orders') {
+			$scope.orderLim = $scope.orders.length;
+		} else {
+			$scope.custLim = $scope.customers.length;
+		}
+	}
+	$scope.prodLim = 5;
+	$scope.orderLim = 3;
+	$scope.custLim = 3;
+	$scope.predicate = 'order_date';
 	OrderFactory.getOrders(function(data){
 		$scope.orders = data;
 	});
@@ -11,15 +25,6 @@ miniStore.controller('dashboards', ['$scope', '$http', 'OrderFactory', 'Customer
 }])
 
 miniStore.controller('orders', ['$scope', '$http', 'OrderFactory', 'CustomerFactory', 'ProductFactory', function($scope, $http, OrderFactory, CustomerFactory, ProductFactory) {
-	OrderFactory.getOrders(function(data){
-		$scope.orders = data;
-	});
-	CustomerFactory.getCustomers(function(data) {
-		$scope.customers = data;
-	})
-	ProductFactory.getProducts(function(data){
-		$scope.products = data;
-	})
 	$scope.newOrder = function() {
 		$scope.errors = '';
 		OrderFactory.createOrder($scope.new_order,
@@ -38,12 +43,21 @@ miniStore.controller('orders', ['$scope', '$http', 'OrderFactory', 'CustomerFact
 			}
 		);
 	}
-}])
-
-miniStore.controller('products', ['$scope', '$http', 'ProductFactory', function($scope, $http, ProductFactory) {
+	OrderFactory.getOrders(function(data){
+		$scope.orders = data;
+	});
+	CustomerFactory.getCustomers(function(data) {
+		$scope.customers = data;
+	})
 	ProductFactory.getProducts(function(data){
 		$scope.products = data;
 	})
+}])
+
+miniStore.controller('products', ['$scope', '$http', 'ProductFactory', function($scope, $http, ProductFactory) {
+	$scope.incLimit = function() {
+		$scope.limits+=5;
+	}
 	$scope.newProduct = function() {
 		$scope.errors = '';
 		ProductFactory.createProduct($scope.new_product,
@@ -53,12 +67,13 @@ miniStore.controller('products', ['$scope', '$http', 'ProductFactory', function(
 		);
 		$scope.new_product = null;
 	}
+	$scope.limits = 15;
+	ProductFactory.getProducts(function(data){
+		$scope.products = data;
+	})
 }])
 
 miniStore.controller('customers', ['$scope', '$http', 'CustomerFactory', function($scope, $http, CustomerFactory) {
-	CustomerFactory.getCustomers(function(data) {
-		$scope.customers = data;
-	})
 	$scope.newCustomer = function() {
 		$scope.errors = '';
 		CustomerFactory.createCustomer($scope.new_customer,
@@ -68,4 +83,7 @@ miniStore.controller('customers', ['$scope', '$http', 'CustomerFactory', functio
 		);
 		$scope.new_customer = null;
 	}
+	CustomerFactory.getCustomers(function(data) {
+		$scope.customers = data;
+	})
 }])

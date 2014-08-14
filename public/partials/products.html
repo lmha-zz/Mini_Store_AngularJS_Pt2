@@ -45,14 +45,14 @@
 		</div>
 		<div class="col-sm-10 pull-right smallCols">
 			<div class="row">
-				<div ng-repeat="product in products | limitTo: 15 | filter: search " class="col-sm-1 prodBox text-center">
+				<div ng-repeat="product in products | limitTo: limits | filter: searchProducts " class="col-sm-1 prodBox text-center">
 					<img ng-src="{{ product.image }}" alt="{{ product.name }} image">
 					<p class="prodInfo" ng-bind="product.name"></p>
 					<p class="prodInfo">({{ product.quantity }})</p>
 				</div>
 			</div>
 			<div class="row text-center">
-				<a href="#/products">show more ... </a>
+				<a ng-click="incLimit()" href="#/products">show more ... </a>
 			</div>
 		</div>
 	</div>
