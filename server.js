@@ -4,7 +4,6 @@ var path = require('path');
 var app = express();
 var config = require('./config/mongoose')
 //all environments
-app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, './server/views'));
 app.set('view engine', 'ejs');
 app.use(express.favicon());
@@ -21,4 +20,4 @@ if('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 var routes = require('./config/routes')(app);
-http.createServer(app).listen(app.get('port'));
+http.createServer(app).listen(process.env.PORT || 3000);
