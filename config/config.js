@@ -17,7 +17,7 @@ module.exports = {
 		root: rootPath,
 		notifier: notifier,
 		app: {
-			name: 'NodeJS Express Mongoose Demo'
+			name: 'NodeJS Express Fruit Stand'
 		}
 	},
 	test: {
@@ -25,10 +25,13 @@ module.exports = {
 		root: rootPath,
 		notifier: notifier,
 		app: {
-			name: "NodeJS Express Mongoose Demo"
+			name: "NodeJS Express Fruit Stand"
 		}
 	},
 	production: {
-		db: process.env.MONGOLAB_URI
+		db: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL,
+		app: {
+			name: 'NodeJS Express Fruit Stand'
+		}
 	}
 }
