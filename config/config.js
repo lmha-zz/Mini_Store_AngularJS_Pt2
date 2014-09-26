@@ -28,5 +28,7 @@ module.exports = {
 			name: "NodeJS Express Mongoose Demo"
 		}
 	},
-	production: {}
+	production: {
+		db: process.env.MONGOLAB_URI
+	}
 }
